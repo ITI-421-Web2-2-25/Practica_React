@@ -6,6 +6,10 @@ export const createCategory = async (req, res) => {
     const { CategoryID, CategoryName, Description, Mime } = req.body;
     const Image = req.file ? req.file.buffer : null;
 
+    if (!Image) {
+      return res.status(400).json({ error: "Image is required" });
+    }
+
     const newCategory = new Category({
       CategoryID,
       CategoryName,
